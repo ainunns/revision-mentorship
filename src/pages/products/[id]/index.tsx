@@ -32,6 +32,10 @@ export default function DetailProduct() {
       .finally(() => setIsLoading(false));
   }, [id]);
 
+  const onDelete = (id: number) => {
+    axios.delete(`/api/product/${id}`).then(() => router.push('/products'));
+  };
+
   if (isLoading) {
     return (
       <div className='flex min-h-screen flex-col items-center justify-center text-gray-800'>
@@ -114,6 +118,7 @@ export default function DetailProduct() {
               variant='primary'
               className='mr-2 h-fit w-fit'
               leftIcon={Trash2Icon}
+              onClick={() => onDelete(productData.id)}
             >
               Delete Product
             </Button>

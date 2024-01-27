@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { EyeIcon, PencilIcon, Trash } from 'lucide-react';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 import IconButton from '@/components/buttons/IconButton';
@@ -7,12 +9,16 @@ import UnstyledLink from '@/components/links/UnstyledLink';
 import { ProductType } from '@/types/products';
 
 export default function TableBody({ data }: { data: ProductType[] }) {
+  const router = useRouter();
+  const onDelete = (id: number) => {
+    axios.delete(`/api/product/${id}`).then(() => router.reload());
+  };
   return (
     <tbody className='divide-y divide-gray-100 border-t border-gray-100'>
-      {data.map((product) => (
+      {data.map((product, item) => (
         <tr className='hover:bg-gray-50' key={product.id}>
           <th className='px-6 py-4 font-normal text-gray-900'>
-            <p className='text-sm font-medium'>{product.id}</p>
+            <p className='text-sm font-medium'>{item + 1}</p>
           </th>
           <td className='px-6 py-4'>
             <p className='text-sm font-medium'>{product.title}</p>
@@ -44,6 +50,7 @@ export default function TableBody({ data }: { data: ProductType[] }) {
                 />
               </UnstyledLink>
               <IconButton
+                onClick={() => onDelete(product.id)}
                 icon={Trash}
                 variant='ghost'
                 className='text-red-500'
