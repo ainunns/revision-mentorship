@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { Pencil, Plus, Trash2Icon } from 'lucide-react';
+import { Pencil, Plus, Save, Trash2Icon } from 'lucide-react';
 import { useRouter } from 'next/router';
+import { parseAsBoolean, useQueryState } from 'nuqs';
 import React from 'react';
 import { ImSpinner8 } from 'react-icons/im';
 
@@ -20,6 +21,10 @@ export default function DetailProduct() {
     null
   );
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [edit, setEdit] = useQueryState(
+    'edit',
+    parseAsBoolean.withDefault(false)
+  );
 
   const router = useRouter();
   const { id } = router.query;
@@ -34,6 +39,29 @@ export default function DetailProduct() {
 
   const onDelete = (id: number) => {
     axios.delete(`/api/product/${id}`).then(() => router.push('/products'));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!edit) return;
+
+    const description = (
+      document.getElementById('description') as HTMLInputElement
+    ).value;
+
+    const body = {
+      description,
+    };
+
+    axios
+      .patch(`/api/product/${id}`, body)
+      .then(() => {
+        alert('Product updated successfully');
+        setEdit(false);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   if (isLoading) {
@@ -65,7 +93,7 @@ export default function DetailProduct() {
               Add Product
             </ButtonLink>
           </div>
-          <form className='flex flex-col gap-4'>
+          <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             <div className='flex flex-col gap-2'>
               <label className='block text-sm font-semibold text-gray-900'>
                 Title
@@ -73,7 +101,7 @@ export default function DetailProduct() {
               <textarea
                 id='title'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500'
-                value={productData.title}
+                defaultValue={productData.title}
                 placeholder='Title of the product'
                 readOnly={true}
               />
@@ -83,12 +111,12 @@ export default function DetailProduct() {
                 Description
               </label>
               <input
-                type='number'
+                type='textarea'
                 id='description'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500'
-                value={productData.description}
+                defaultValue={productData.description}
                 placeholder='Description of the product'
-                readOnly={true}
+                readOnly={!edit}
               />
             </div>
             <div className='flex flex-col gap-2'>
@@ -96,33 +124,59 @@ export default function DetailProduct() {
                 Price (USD)
               </label>
               <input
-                type='text'
+                type='number'
                 id='price'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500'
-                value={productData.price}
+                defaultValue={productData.price}
                 placeholder='0.00'
                 step={0.01}
                 readOnly={true}
               />
             </div>
+            {edit && (
+              <div className='flex flex-row items-center gap-4'>
+                <Button
+                  type='submit'
+                  variant='primary'
+                  className='mr-2 h-fit w-fit'
+                  leftIcon={Save}
+                >
+                  Save Product
+                </Button>
+                <Button
+                  type='button'
+                  variant='primary'
+                  className='mr-2 h-fit w-fit'
+                  leftIcon={Trash2Icon}
+                  onClick={() => onDelete(productData.id)}
+                >
+                  Delete Product
+                </Button>
+              </div>
+            )}
           </form>
-          <div className='flex flex-row items-center gap-4'>
-            <Button
-              variant='primary'
-              className='mr-2 h-fit w-fit'
-              leftIcon={Pencil}
-            >
-              Edit Product
-            </Button>
-            <Button
-              variant='primary'
-              className='mr-2 h-fit w-fit'
-              leftIcon={Trash2Icon}
-              onClick={() => onDelete(productData.id)}
-            >
-              Delete Product
-            </Button>
-          </div>
+          {!edit && (
+            <div className='flex flex-row items-center gap-4'>
+              <Button
+                type='button'
+                variant='primary'
+                className='mr-2 h-fit w-fit'
+                leftIcon={Pencil}
+                onClick={() => setEdit(true)}
+              >
+                Edit Product
+              </Button>
+              <Button
+                type='button'
+                variant='primary'
+                className='mr-2 h-fit w-fit'
+                leftIcon={Trash2Icon}
+                onClick={() => onDelete(productData.id)}
+              >
+                Delete Product
+              </Button>
+            </div>
+          )}
         </section>
       </main>
     </Layout>

@@ -4908,6 +4908,11 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-1.2.6.tgz#8637a5b759ea0d6e98702cfb3a9283323c93af44"
   integrity sha512-Jsjnk4bw3YJqYzbdyBiNsPWHPfO++UGG749Cxs6peCu5Xg4nrena6OVxOYxrQTqww0Jmwt+Ref8rggumkTLz9Q==
 
+mitt@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.1.tgz#ea36cf0cc30403601ae074c8f77b7092cdab36d1"
+  integrity sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -5037,6 +5042,13 @@ nth-check@^2.0.1:
   integrity sha512-it1vE95zF6dTT9lBsYbxvqh0Soy4SPowchj0UBGj/V6cTPnXXtQOPUbhZ6CmGzAD/rW22LQK6E96pcdJXk4A4w==
   dependencies:
     boolbase "^1.0.0"
+
+nuqs@^1.15.4:
+  version "1.15.4"
+  resolved "https://registry.yarnpkg.com/nuqs/-/nuqs-1.15.4.tgz#74c34c41ebe6bda6d1d24cc917128299a50ea65b"
+  integrity sha512-D4u2Y/Qe2O1wmHPxK9+/LM3ioToqRaK9mKyZiLc1PRo8JIXmUKTCce9JBg0MHEJHT+huz2h3pSINPQqKOwAD3A==
+  dependencies:
+    mitt "^3.0.1"
 
 nwsapi@^2.2.0:
   version "2.2.0"
