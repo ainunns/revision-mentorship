@@ -3,6 +3,8 @@ import { EyeIcon, PencilIcon, Trash } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React from 'react';
 
+import { truncateText } from '@/lib/helper';
+
 import IconButton from '@/components/buttons/IconButton';
 import UnstyledLink from '@/components/links/UnstyledLink';
 
@@ -25,11 +27,11 @@ export default function TableBody({ data }: { data: ProductType[] }) {
           </td>
           <td className='px-6 py-4'>
             <p className='truncate text-sm font-medium'>
-              {product.description}
+              {truncateText(product.description, 10)}
             </p>
           </td>
           <td className='px-6 py-4'>
-            <p className='text-sm font-medium'>{product.price}</p>
+            <p className='text-sm font-medium'>${product.price}</p>
           </td>
           <td className='px-6 py-4'>
             <div className='flex justify-center gap-4'>
