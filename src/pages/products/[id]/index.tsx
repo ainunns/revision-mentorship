@@ -67,11 +67,10 @@ export default function DetailProduct() {
           </div>
           <form className='flex flex-col gap-4'>
             <div className='flex flex-col gap-2'>
-              <label className='block text-sm font-medium text-gray-900'>
+              <label className='block text-sm font-semibold text-gray-900'>
                 Title
               </label>
-              <input
-                type='text'
+              <textarea
                 id='title'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500'
                 value={productData.title}
@@ -80,11 +79,11 @@ export default function DetailProduct() {
               />
             </div>
             <div className='flex flex-col gap-2'>
-              <label className='block text-sm font-medium text-gray-900'>
+              <label className='block text-sm font-semibold text-gray-900'>
                 Description
               </label>
               <input
-                type='text'
+                type='number'
                 id='description'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500'
                 value={productData.description}
@@ -93,7 +92,7 @@ export default function DetailProduct() {
               />
             </div>
             <div className='flex flex-col gap-2'>
-              <label className='block text-sm font-medium text-gray-900'>
+              <label className='block text-sm font-semibold text-gray-900'>
                 Price (USD)
               </label>
               <input
@@ -102,6 +101,7 @@ export default function DetailProduct() {
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500'
                 value={productData.price}
                 placeholder='0.00'
+                step={0.01}
                 readOnly={true}
               />
             </div>
