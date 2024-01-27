@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Pencil, Plus, Save, Trash2Icon } from 'lucide-react';
+import { Pencil, Plus, Save, Trash2Icon, X } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { parseAsBoolean, useQueryState } from 'nuqs';
 import React from 'react';
@@ -93,12 +93,14 @@ export default function DetailProduct() {
               Add Product
             </ButtonLink>
           </div>
+          <h1>Detail Product</h1>
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             <div className='flex flex-col gap-2'>
               <label className='block text-sm font-semibold text-gray-900'>
                 Title
               </label>
-              <textarea
+              <input
+                type='text'
                 id='title'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500'
                 defaultValue={productData.title}
@@ -110,8 +112,7 @@ export default function DetailProduct() {
               <label className='block text-sm font-semibold text-gray-900'>
                 Description
               </label>
-              <input
-                type='textarea'
+              <textarea
                 id='description'
                 className='block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500'
                 defaultValue={productData.description}
@@ -134,7 +135,7 @@ export default function DetailProduct() {
               />
             </div>
             {edit && (
-              <div className='flex flex-row items-center gap-4'>
+              <div className='mt-4 flex flex-row items-center gap-4'>
                 <Button
                   type='submit'
                   variant='primary'
@@ -145,12 +146,12 @@ export default function DetailProduct() {
                 </Button>
                 <Button
                   type='button'
-                  variant='primary'
+                  variant='danger'
                   className='mr-2 h-fit w-fit'
-                  leftIcon={Trash2Icon}
-                  onClick={() => onDelete(productData.id)}
+                  leftIcon={X}
+                  onClick={() => setEdit(false)}
                 >
-                  Delete Product
+                  Cancel Editing
                 </Button>
               </div>
             )}
@@ -168,7 +169,7 @@ export default function DetailProduct() {
               </Button>
               <Button
                 type='button'
-                variant='primary'
+                variant='danger'
                 className='mr-2 h-fit w-fit'
                 leftIcon={Trash2Icon}
                 onClick={() => onDelete(productData.id)}
