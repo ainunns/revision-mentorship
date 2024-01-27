@@ -11,7 +11,7 @@ export default function TableBody({ data }: { data: ProductType[] }) {
     <tbody className='divide-y divide-gray-100 border-t border-gray-100'>
       {data.map((product) => (
         <tr className='hover:bg-gray-50' key={product.id}>
-          <th className='flex gap-3 px-6 py-4 font-normal text-gray-900'>
+          <th className='px-6 py-4 font-normal text-gray-900'>
             <p className='text-sm font-medium'>{product.id}</p>
           </th>
           <td className='px-6 py-4'>
