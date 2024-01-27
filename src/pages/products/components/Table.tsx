@@ -12,7 +12,7 @@ type TableProps = {
 
 export default function Table({ title, data }: TableProps) {
   return (
-    <div className='mt-5 w-full overflow-hidden rounded-lg border border-gray-200 shadow-md'>
+    <div className='mt-5 w-full overflow-auto rounded-lg border border-gray-200 shadow-md'>
       <table className='w-full border-collapse bg-white text-left text-sm text-gray-500'>
         <TableHead title={title} />
         <TableBody data={data} />
