@@ -39,3 +39,13 @@ export function getFromSessionStorage(key: string): string | null {
   }
   return null;
 }
+
+export function truncateText(text: string, maxWords: number) {
+  const words = text.split(' ');
+
+  if (words.length > maxWords) {
+    return words.slice(0, maxWords).join(' ') + ' ...';
+  } else {
+    return text;
+  }
+}

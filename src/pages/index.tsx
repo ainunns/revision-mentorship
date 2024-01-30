@@ -20,9 +20,18 @@ export default function HomePage() {
             <p className='mt-2 text-gray-500'>
               A template for revision-style mentorship by Theodorus Clarence
             </p>
-            <ArrowLink as={PrimaryLink} className='mt-2' href='/api-tester'>
-              /api-tester
-            </ArrowLink>
+            <p>
+              See the{' '}
+              <ArrowLink as={PrimaryLink} className='mt-2' href='/api-tester'>
+                /api-tester
+              </ArrowLink>
+            </p>
+            <p>
+              Or go to the demo{' '}
+              <ArrowLink as={PrimaryLink} className='mt-2' href='/products'>
+                /products
+              </ArrowLink>
+            </p>
           </div>
         </section>
       </main>
